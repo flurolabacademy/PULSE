@@ -9,14 +9,73 @@
 <body>
   <div class="pulse-container">
     
-    <!-- Header -->
-    <header class="pulse-header">
-      <div class="pulse-logo">
-        <span class="pulse-icon">💓</span>
-        <h1>PULSE</h1>
-      </div>
-      <p class="pulse-tagline">Tu agente IA para crear ebooks que venden</p>
-    </header>
+    <!-- NUEVO HEADER -->
+<<header class="pulse-header">
+  <div class="pulse-logo">
+    <!-- MASCOTA PULSE SVG -->
+    <div class="pulse-mascot">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <!-- Ondas de pulso -->
+        <circle class="pulse-ring" cx="50" cy="50" r="20" fill="none" stroke="#FF6B9D" stroke-width="2" opacity="0.6"/>
+        <circle class="pulse-ring" cx="50" cy="50" r="20" fill="none" stroke="#FFD700" stroke-width="2" opacity="0.4" style="animation-delay: 0.5s"/>
+        
+        <!-- Núcleo -->
+        <circle class="pulse-core" cx="50" cy="50" r="15" fill="url(#pulseGradient)"/>
+        
+        <!-- Ojos IA -->
+        <ellipse cx="43" cy="47" rx="3" ry="4" fill="#0a0a1a"/>
+        <ellipse cx="57" cy="47" rx="3" ry="4" fill="#0a0a1a"/>
+        
+        <!-- Brillo -->
+        <circle cx="47" cy="44" r="2" fill="white" opacity="0.8"/>
+        
+        <!-- Gradient -->
+        <defs>
+          <radialGradient id="pulseGradient" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#FF6B9D"/>
+            <stop offset="100%" stop-color="#FFD700"/>
+          </radialGradient>
+        </defs>
+      </svg>
+    </div>
+    
+    <h1>PULSE</h1>
+  </div>
+  
+  <p class="pulse-tagline">Agente IA para crear ebooks que venden 24/7</p>
+  
+  <!-- STATS -->
+  <div class="pulse-stats">
+    <div class="stat-card">
+      <div class="stat-value">3.3</div>
+      <div class="stat-label">Modelo IA</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">131K</div>
+      <div class="stat-label">Context Tokens</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">280</div>
+      <div class="stat-label">Tokens/seg</div>
+    </div>
+  </div>
+</header>
+
+<!-- PASOS -->
+<div class="pulse-steps">
+  <div class="step active">
+    <div class="step-number">1</div>
+    <div class="step-label">Idea</div>
+  </div>
+  <div class="step">
+    <div class="step-number">2</div>
+    <div class="step-label">Crear</div>
+  </div>
+  <div class="step">
+    <div class="step-number">3</div>
+    <div class="step-label">Vender</div>
+  </div>
+</div>
 
     <!-- Modo: Generar Ebook -->
     <section class="pulse-section" id="ebookSection">
@@ -63,14 +122,38 @@
         </button>
       </form>
       
-      <!-- Loading -->
-      <div id="loading" class="pulse-loading hidden">
-        <span class="pulse-heart">💓</span>
-        <p>PULSE está creando tu ebook...</p>
-        <div class="pulse-progress">
-          <div class="pulse-bar"></div>
-        </div>
-      </div>
+     <!-- NUEVO LOADING -->
+<div id="loading" class="pulse-loading hidden">
+  <div class="pulse-brain">
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <!-- Cerebro estilizado -->
+      <path class="brain-core" d="M50 20 C30 20, 20 35, 20 50 C20 65, 30 80, 50 80 C70 80, 80 65, 80 50 C80 35, 70 20, 50 20" 
+            fill="none" stroke="url(#brainGradient)" stroke-width="3" stroke-linecap="round"/>
+      
+      <!-- Líneas de conexión -->
+      <line x1="35" y1="40" x2="65" y2="40" stroke="#FF6B9D" stroke-width="2" opacity="0.6"/>
+      <line x1="40" y1="55" x2="60" y2="55" stroke="#FFD700" stroke-width="2" opacity="0.6"/>
+      <line x1="45" y1="70" x2="55" y2="70" stroke="#FF6B9D" stroke-width="2" opacity="0.6"/>
+      
+      <!-- Nodos -->
+      <circle class="brain-ring" cx="35" cy="40" r="4" fill="#FF6B9D"/>
+      <circle class="brain-ring" cx="65" cy="40" r="4" fill="#FFD700" style="animation-delay: 0.3s"/>
+      <circle class="brain-ring" cx="50" cy="55" r="5" fill="#FF6B9D" style="animation-delay: 0.6s"/>
+      
+      <defs>
+        <linearGradient id="brainGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#FF6B9D"/>
+          <stop offset="100%" stop-color="#FFD700"/>
+        </linearGradient>
+      </defs>
+    </svg>
+  </div>
+  
+  <p>PULSE está analizando tu nicho<span class="pulse-dots"></span></p>
+  <div class="pulse-progress">
+    <div class="pulse-bar"></div>
+  </div>
+</div>
       
       <!-- Resultado -->
       <div id="result" class="pulse-result hidden">
