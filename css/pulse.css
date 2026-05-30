@@ -539,3 +539,50 @@ body {
     padding: 1.5rem;
   }
 }
+/* Tablas markdown */
+.pulse-result pre,
+.pulse-result table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.pulse-result pre {
+  white-space: pre-wrap;
+  font-family: inherit;
+  line-height: 1.6;
+}
+
+/* Si la IA genera con | para tablas */
+.pulse-result pre:contains("|") {
+  display: table;
+}
+
+/* Estilo para tablas */
+.pulse-result table,
+.pulse-result pre table {
+  border: 1px solid var(--pulse-border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.pulse-result th,
+.pulse-result td {
+  padding: 0.8rem;
+  border: 1px solid var(--pulse-border);
+  text-align: left;
+}
+
+.pulse-result th {
+  background: var(--pulse-gradient);
+  color: var(--pulse-white);
+  font-weight: 700;
+}
+
+.pulse-result tr:nth-child(even) {
+  background: var(--pulse-darker);
+}
+
+.pulse-result tr:hover {
+  background: rgba(255, 107, 157, 0.1);
+}
