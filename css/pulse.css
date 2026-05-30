@@ -586,3 +586,151 @@ body {
 .pulse-result tr:hover {
   background: rgba(255, 107, 157, 0.1);
 }
+/* ===== TABLAS MARKDOWN A HTML ===== */
+.pulse-result .markdown-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  font-size: 0.9rem;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.pulse-result .markdown-table thead {
+  background: var(--pulse-gradient);
+  color: var(--pulse-white);
+}
+
+.pulse-result .markdown-table th {
+  padding: 1rem;
+  text-align: left;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+}
+
+.pulse-result .markdown-table td {
+  padding: 0.8rem 1rem;
+  border-bottom: 1px solid var(--pulse-border);
+  color: var(--pulse-text);
+}
+
+.pulse-result .markdown-table tbody tr:nth-child(even) {
+  background: var(--pulse-darker);
+}
+
+.pulse-result .markdown-table tbody tr:hover {
+  background: rgba(255, 107, 157, 0.1);
+  transition: background 0.3s;
+}
+
+/* Dificultad badges */
+.difficulty-low {
+  background: #22c55e;
+  color: white;
+  padding: 0.2rem 0.6rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.difficulty-medium {
+  background: #f59e0b;
+  color: white;
+  padding: 0.2rem 0.6rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.difficulty-high {
+  background: #ef4444;
+  color: white;
+  padding: 0.2rem 0.6rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+/* Potencial badges */
+.potential-high {
+  background: var(--pulse-gradient);
+  color: white;
+  padding: 0.2rem 0.6rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.potential-medium {
+  background: #8b5cf6;
+  color: white;
+  padding: 0.2rem 0.6rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.potential-low {
+  background: #6b7280;
+  color: white;
+  padding: 0.2rem 0.6rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+/* Lista de nichos alternativa */
+.niches-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.niche-card {
+  background: var(--pulse-darker);
+  border: 1px solid var(--pulse-border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.3s;
+}
+
+.niche-card:hover {
+  border-color: var(--pulse-primary);
+  transform: translateX(5px);
+}
+
+.niche-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.8rem;
+}
+
+.niche-card-title {
+  font-weight: 700;
+  color: var(--pulse-white);
+  font-size: 1.1rem;
+}
+
+.niche-card-sub {
+  color: var(--pulse-muted);
+  font-size: 0.9rem;
+  margin-bottom: 0.8rem;
+}
+
+.niche-card-meta {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.niche-card-why {
+  margin-top: 0.8rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--pulse-border);
+  color: var(--pulse-muted);
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
