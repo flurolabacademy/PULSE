@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PULSE — Agente IA de Ebooks</title>
+  <link rel="stylesheet" href="css/pulse.css">
+</head>
+<body>
+  <div class="pulse-container">
+    
+    <!-- Header -->
+    <header class="pulse-header">
+      <div class="pulse-logo">
+        <span class="pulse-icon">💓</span>
+        <h1>PULSE</h1>
+      </div>
+      <p class="pulse-tagline">Tu agente IA para crear ebooks que venden</p>
+    </header>
+
+    <!-- Modo: Generar Ebook -->
+    <section class="pulse-section" id="ebookSection">
+      <h2>📚 Generar Ebook</h2>
+      
+      <form id="ebookForm" class="pulse-form">
+        <div class="form-group">
+          <label>Tema del ebook</label>
+          <input type="text" id="topic" placeholder="Ej: Cómo dormir mejor" required>
+        </div>
+        
+        <div class="form-group">
+          <label>Nicho</label>
+          <select id="niche" required>
+            <option value="">Selecciona...</option>
+            <option value="salud">Salud</option>
+            <option value="finanzas">Finanzas</option>
+            <option value="productividad">Productividad</option>
+            <option value="relaciones">Relaciones</option>
+            <option value="fitness">Fitness</option>
+            <option value="negocios">Negocios</option>
+            <option value="hobbies">Hobbies</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label>Número de páginas</label>
+          <input type="number" id="pages" value="15" min="5" max="50">
+        </div>
+        
+        <div class="form-group">
+          <label>Tono</label>
+          <select id="tone">
+            <option value="profesional">Profesional</option>
+            <option value="cercano">Cercano/amigable</option>
+            <option value="urgente">Urgente/motivador</option>
+            <option value="divertido">Divertido/irreverente</option>
+          </select>
+        </div>
+        
+        <button type="submit" class="pulse-btn">
+          <span class="pulse-btn-icon">⚡</span>
+          Generar Ebook
+        </button>
+      </form>
+      
+      <!-- Loading -->
+      <div id="loading" class="pulse-loading hidden">
+        <span class="pulse-heart">💓</span>
+        <p>PULSE está creando tu ebook...</p>
+        <div class="pulse-progress">
+          <div class="pulse-bar"></div>
+        </div>
+      </div>
+      
+      <!-- Resultado -->
+      <div id="result" class="pulse-result hidden">
+        <div class="result-header">
+          <h3 id="resultTitle">Ebook listo</h3>
+          <span class="result-badge">✅ Generado por PULSE</span>
+        </div>
+        
+        <div class="result-actions">
+          <button onclick="copyContent()" class="pulse-btn secondary">
+            📋 Copiar texto
+          </button>
+          <button onclick="generatePDF()" class="pulse-btn primary">
+            📥 Descargar PDF
+          </button>
+        </div>
+        
+        <textarea id="resultContent" readonly></textarea>
+      </div>
+    </section>
+
+    <!-- Modo: Generar Títulos -->
+    <section class="pulse-section" id="titlesSection">
+      <h2>✨ Generar Títulos</h2>
+      <form id="titlesForm" class="pulse-form">
+        <div class="form-group">
+          <label>Tema o nicho</label>
+          <input type="text" id="titleTopic" placeholder="Ej: Productividad matutina" required>
+        </div>
+        <button type="submit" class="pulse-btn">Generar 10 Títulos</button>
+      </form>
+      <div id="loadingTitles" class="pulse-loading hidden">
+        <span class="pulse-heart">💓</span>
+        <p>PULSE está pensando...</p>
+      </div>
+      <div id="titlesResult" class="pulse-result hidden"></div>
+    </section>
+
+    <!-- Modo: Generar Nichos -->
+    <section class="pulse-section" id="nichesSection">
+      <h2>🎯 Generar Ideas de Nichos</h2>
+      <form id="nichesForm" class="pulse-form">
+        <div class="form-group">
+          <label>Categoría</label>
+          <select id="nicheCategory">
+            <option value="salud">Salud</option>
+            <option value="finanzas">Finanzas</option>
+            <option value="productividad">Productividad</option>
+            <option value="relaciones">Relaciones</option>
+            <option value="fitness">Fitness</option>
+            <option value="negocios">Negocios</option>
+            <option value="hobbies">Hobbies</option>
+          </select>
+        </div>
+        <button type="submit" class="pulse-btn">Generar 20 Nichos</button>
+      </form>
+      <div id="loadingNiches" class="pulse-loading hidden">
+        <span class="pulse-heart">💓</span>
+        <p>PULSE está investigando...</p>
+      </div>
+      <div id="nichesResult" class="pulse-result hidden"></div>
+    </section>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
