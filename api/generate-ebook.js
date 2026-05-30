@@ -49,15 +49,19 @@ export default async function handler(req, res) {
             6. RECURSOS ADICIONALES (checklist, plantilla, etc.)
             
             Cada capítulo debe incluir:
-            - Título claro
-            - 2-3 puntos clave
-            - Ejemplo práctico o caso
-            - Acción a tomar
+- Título claro
+- Introducción al capítulo (150 palabras)
+- 3-5 puntos clave detallados (200 palabras cada uno)
+- 2 ejemplos prácticos o casos reales
+- Ejercicio o acción a tomar
+- Resumen del capítulo (100 palabras)
+
+IMPORTANTE: Cada capítulo debe tener MÍNIMO 800 palabras. El ebook completo debe tener contenido sustancial, no resúmenes breves.
             
             Formato: Markdown limpio, sin emojis excesivos.`
           }
         ],
-        max_tokens: 4000,
+        max_tokens: 8000,
         temperature: 0.7
       })
     });
