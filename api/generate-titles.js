@@ -1,23 +1,25 @@
-// netlify/functions/generate-titles.js
-exports.handler = async (event, context) => {
-  if (event.httpMethod !== 'POST') {
-    return {
-      statusCode: 405,
-      body: JSON.stringify({ error: 'Method not allowed' })
-    };
+// api/generate-titles.js — Vercel
+export default async function handler(req, res) {
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
   }
 
   try {
-    const { topic, niche } = JSON.parse(event.body);
+    const { topic, niche } = req.body;
+    const apiKey = process.env.GROQ_API_KEY;
+    
+    if (!apiKey) {
+      return res.status(500).json({ success: false, error: 'GROQ_API_KEY no configurada' });
+    }
     
     const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${process.env.GROQ_API_KEY}`,
+        'Authorization': `Bearer ${apiKey}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        model: 'llama3-70b-8192',
+        model: 'llama-3.3-70b-versatile',
         messages: [
           {
             role: 'system',
@@ -46,29 +48,15 @@ exports.handler = async (event, context) => {
     const data = await response.json();
     
     if (data.error) {
-      throw new Error(data.error.message);
+      return res.status(500).json({ success: false, error: data.error.message });
     }
 
-    return {
-      statusCode: 200,
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Headers': 'Content-Type',
-        'Access-Control-Allow-Methods': 'POST, OPTIONS'
-      },
-      body: JSON.stringify({
-        success: true,
-        titles: data.choices[0].message.content
-      })
-    };
+    return res.status(200).json({
+      success: true,
+      titles: data.choices[0].message.content
+    });
 
   } catch (error) {
-    return {
-      statusCode: 500,
-      body: JSON.stringify({
-        success: false,
-        error: error.message
-      })
-    };
+    return res.status(500).json({ success: false, error: error.message });
   }
-};
+}
