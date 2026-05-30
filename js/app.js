@@ -128,7 +128,143 @@ function showTextResult(sectionId, loadingId, resultId, content) {
   
   loading.classList.add('hidden');
   result.classList.remove('hidden');
-  result.innerHTML = `<pre style="white-space: pre-wrap; font-family: inherit; line-height: 1.6;">${content}</pre>`;
+  
+  // Convertir tabla markdown a HTML si existe
+  const htmlContent = convertMarkdownToHtml(content);
+  
+  result.innerHTML = `<div style="overflow-x: auto;">${htmlContent}</div>`;
+}
+
+// Función principal: convierte markdown a HTML visual
+function convertMarkdownToHtml(markdown) {
+  // Si es tabla markdown (contiene |)
+  if (markdown.includes('|') && markdown.includes('\n')) {
+    return markdownTableToHtml(markdown);
+  }
+  
+  // Si es lista numerada con formato específico
+  if (markdown.includes('Nicho:') || markdown.includes('Sub-nicho:')) {
+    return nichesListToHtml(markdown);
+  }
+  
+  // Default: texto plano con formato
+  return `<pre style="white-space: pre-wrap; font-family: inherit; line-height: 1.6;">${markdown}</pre>`;
+}
+
+// Convertir tabla markdown a HTML
+function markdownTableToHtml(markdown) {
+  const lines = markdown.split('\n').filter(line => line.trim());
+  let html = '<table class="markdown-table"><thead>';
+  let isHeader = true;
+  
+  lines.forEach((line) => {
+    // Saltar líneas separadoras (---)
+    if (line.match(/^\|?[\s\-:|]+\|?$/)) return;
+    
+    const cells = line.split('|').filter(cell => cell.trim());
+    if (cells.length === 0) return;
+    
+    const tag = isHeader ? 'th' : 'td';
+    if (isHeader) {
+      html += '<tr>';
+      cells.forEach(cell => {
+        html += `<${tag}>${cell.trim()}</${tag}>`;
+      });
+      html += '</tr></thead><tbody>';
+      isHeader = false;
+    } else {
+      html += '<tr>';
+      cells.forEach((cell, index) => {
+        const cleanCell = cell.trim();
+        // Aplicar badges según contenido
+        let styledCell = cleanCell;
+        
+        if (index === 2) { // Dificultad
+          if (cleanCell.toLowerCase().includes('baja')) {
+            styledCell = `<span class="difficulty-low">${cleanCell}</span>`;
+          } else if (cleanCell.toLowerCase().includes('media')) {
+            styledCell = `<span class="difficulty-medium">${cleanCell}</span>`;
+          } else if (cleanCell.toLowerCase().includes('alta')) {
+            styledCell = `<span class="difficulty-high">${cleanCell}</span>`;
+          }
+        }
+        
+        if (index === 3) { // Potencial
+          if (cleanCell.toLowerCase().includes('alto')) {
+            styledCell = `<span class="potential-high">${cleanCell}</span>`;
+          } else if (cleanCell.toLowerCase().includes('medio')) {
+            styledCell = `<span class="potential-medium">${cleanCell}</span>`;
+          } else if (cleanCell.toLowerCase().includes('bajo')) {
+            styledCell = `<span class="potential-low">${cleanCell}</span>`;
+          }
+        }
+        
+        html += `<${tag}>${styledCell}</${tag}>`;
+      });
+      html += '</tr>';
+    }
+  });
+  
+  html += '</tbody></table>';
+  return html;
+}
+
+// Convertir lista de nichos a cards HTML
+function nichesListToHtml(markdown) {
+  const items = markdown.split(/\n(?=\d+\.|\-)/).filter(item => item.trim());
+  
+  let html = '<div class="niches-list">';
+  
+  items.forEach(item => {
+    const lines = item.split('\n').filter(line => line.trim());
+    if (lines.length === 0) return;
+    
+    let title = '';
+    let sub = '';
+    let difficulty = '';
+    let potential = '';
+    let why = '';
+    
+    lines.forEach(line => {
+      if (line.match(/^\d+\./)) {
+        title = line.replace(/^\d+\.\s*/, '').trim();
+      } else if (line.includes('Sub-nicho:')) {
+        sub = line.replace('Sub-nicho:', '').trim();
+      } else if (line.includes('Dificultad:')) {
+        difficulty = line.replace('Dificultad:', '').trim();
+      } else if (line.includes('Potencial:')) {
+        potential = line.replace('Potencial:', '').trim();
+      } else if (line.includes('Por qué:') || line.includes('Por qué funciona:')) {
+        why = line.replace(/Por qué.*?:/, '').trim();
+      }
+    });
+    
+    // Badge classes
+    let diffClass = 'difficulty-medium';
+    if (difficulty.toLowerCase().includes('baja')) diffClass = 'difficulty-low';
+    if (difficulty.toLowerCase().includes('alta')) diffClass = 'difficulty-high';
+    
+    let potClass = 'potential-medium';
+    if (potential.toLowerCase().includes('alto')) potClass = 'potential-high';
+    if (potential.toLowerCase().includes('bajo')) potClass = 'potential-low';
+    
+    html += `
+      <div class="niche-card">
+        <div class="niche-card-header">
+          <span class="niche-card-title">${title}</span>
+        </div>
+        <div class="niche-card-sub">${sub}</div>
+        <div class="niche-card-meta">
+          <span class="${diffClass}">${difficulty}</span>
+          <span class="${potClass}">${potential}</span>
+        </div>
+        ${why ? `<div class="niche-card-why">${why}</div>` : ''}
+      </div>
+    `;
+  });
+  
+  html += '</div>';
+  return html;
 }
 
 function showError(sectionId, loadingId, message) {
