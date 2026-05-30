@@ -169,10 +169,10 @@ function generatePDF() {
   // Contenido
   doc.addPage();
   doc.setTextColor(0, 0, 0);
-  doc.setFontSize(11);
+  doc.setFontSize(12);
   
   const content = document.getElementById('resultContent').value;
-  const lines = doc.splitTextToSize(content, 180);
+  const lines = doc.splitTextToSize(content, 150); // Márgenes más grandes
   
   let y = 20;
   const lineHeight = 6;
