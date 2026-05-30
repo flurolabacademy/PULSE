@@ -1,4 +1,4 @@
-// js/app.js
+// js/app.js — PULSE para Vercel (api/ en lugar de netlify/functions)
 
 // Variables globales
 let currentEbookContent = '';
@@ -17,7 +17,7 @@ document.getElementById('ebookForm').addEventListener('submit', async (e) => {
   showLoading('ebookSection', 'loading');
   
   try {
-    const response = await fetch('/.netlify/functions/generate-ebook', {
+    const response = await fetch('/api/generate-ebook', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -40,7 +40,7 @@ document.getElementById('ebookForm').addEventListener('submit', async (e) => {
   }
 });
 
-// === GENERAR TÍTULOS ===
+// === GENERAR TITULOS ===
 document.getElementById('titlesForm').addEventListener('submit', async (e) => {
   e.preventDefault();
   
@@ -49,7 +49,7 @@ document.getElementById('titlesForm').addEventListener('submit', async (e) => {
   showLoading('titlesSection', 'loadingTitles');
   
   try {
-    const response = await fetch('/.netlify/functions/generate-titles', {
+    const response = await fetch('/api/generate-titles', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -78,7 +78,7 @@ document.getElementById('nichesForm').addEventListener('submit', async (e) => {
   showLoading('nichesSection', 'loadingNiches');
   
   try {
-    const response = await fetch('/.netlify/functions/generate-niches', {
+    const response = await fetch('/api/generate-niches', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -193,7 +193,7 @@ function generatePDF() {
     doc.setPage(i);
     doc.setFontSize(8);
     doc.setTextColor(150, 150, 150);
-    doc.text(`PULSE | Daniel Dosantos Libertad | Página ${i}`, 105, 290, { align: 'center' });
+    doc.text(`PULSE | Daniel Dosantos Libertad | Pagina ${i}`, 105, 290, { align: 'center' });
   }
   
   doc.save(`${(currentEbookTitle || 'ebook').replace(/\s+/g, '_')}.pdf`);
