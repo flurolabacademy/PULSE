@@ -45,11 +45,9 @@ Ejemplo:
    Por qué: El ayuno intermitente y keto siguen en tendencia, la gente busca soluciones rápidas
 
 Genera 20 nichos siguiendo exactamente este formato.`
-            
-            Formato: Tabla markdown.`
           }
         ],
-        max_tokens: 2000,
+        max_tokens: 4000,
         temperature: 0.7
       })
     });
