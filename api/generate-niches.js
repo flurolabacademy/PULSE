@@ -28,13 +28,23 @@ export default async function handler(req, res) {
           {
             role: 'user',
             content: `Genera ${count || 20} ideas de nichos rentables para ebooks en la categoría: ${category}
-            
-            Para cada nicho incluir:
-            - Nombre del nicho
-            - Sub-nicho específico
-            - Dificultad (Baja/Media/Alta)
-            - Potencial de ingresos (Bajo/Medio/Alto)
-            - Por qué funciona ahora
+
+IMPORTANTE: Genera en formato de lista numerada, NO en tabla. Cada nicho debe tener:
+
+1. [Nombre del nicho]
+   Sub-nicho: [específico]
+   Dificultad: [Baja/Media/Alta]
+   Potencial: [Bajo/Medio/Alto]
+   Por qué: [explicación breve de por qué funciona ahora]
+
+Ejemplo:
+1. Recetas Keto para Principiantes
+   Sub-nicho: Recetas de 15 minutos para personas que trabajan
+   Dificultad: Baja
+   Potencial: Alto
+   Por qué: El ayuno intermitente y keto siguen en tendencia, la gente busca soluciones rápidas
+
+Genera 20 nichos siguiendo exactamente este formato.`
             
             Formato: Tabla markdown.`
           }
